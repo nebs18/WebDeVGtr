@@ -219,7 +219,7 @@
                                     <li><a href="shop-detail.html" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
                                 </ul>
-                                <a class="cart" href="#">Add to Cart</a>
+                                <a class="cart" href="#" onclick="addToCart('Clifton S Series S3 Grand Orchestra Mahogany', 19200)">Add to Cart</a>
                             </div>
                         </div>
                         <div class="why-text">
@@ -936,5 +936,28 @@
         <script src="js/contact-form-script.js"></script>
         <script src="js/custom.js"></script>
     </body>
+    <script>
+        function addToCart(productName, price) {
+            // Retrieve the existing cart items from localStorage
+            var cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    
+            // Add the new product to the cart
+            var newProduct = {
+                productName: productName,
+                price: price
+            };
+            cartItems.push(newProduct);
+    
+            // Save the updated cart items back to localStorage
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    
+            // Display a success message
+            alert('Product successfully added to cart: ' + productName);
+    
+            // Redirect to the cart.html page
+            window.location.href = 'cart.html';
+        }
+    </script>
+
     
     </html>
