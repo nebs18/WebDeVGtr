@@ -183,100 +183,33 @@
     <!-- End All Title Box -->
 
     <!-- Start Cart  -->
-    <div class="cart-box-main">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="table-main table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Images</th>
-                                    <th>Product Name</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Total</th>
-                                    <th>Remove</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="thumbnail-img">
-                                        <a href="#">
-									<img class="img-fluid" src="images/git1.png" alt="" />
-								</a>
-                                    </td>
-                                    <td class="name-pr">
-                                        <a href="#">
-                                            Clifton S Series S3 Grand Orchestra Mahogany
-								</a>
-                                    </td>
-                                    <td class="price-pr">
-                                        <p> ₱19,200</p>
-                                    </td>
-                                    <td class="quantity-box"><input type="number" size="4" value="1" min="0" step="1" class="c-input-text qty text"></td>
-                                    <td class="total-pr">
-                                        <p> ₱19,200</p>
-                                    </td>
-                                    <td class="remove-pr">
-                                        <a href="#">
-									<i class="fas fa-times"></i>
-								</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="thumbnail-img">
-                                        <a href="#">
-									<img class="img-fluid" src="images/elgit2.png" alt="" />
-								</a>
-                                    </td>
-                                    <td class="name-pr">
-                                        <a href="#">
-                                            Clifton Vintage Custom Stratocaster (Black)
-								</a>
-                                    </td>
-                                    <td class="price-pr">
-                                        <p>₱5,200</p>
-                                    </td>
-                                    <td class="quantity-box"><input type="number" size="4" value="1" min="0" step="1" class="c-input-text qty text"></td>
-                                    <td class="total-pr">
-                                        <p>₱5,200</p>
-                                    </td>
-                                    <td class="remove-pr">
-                                        <a href="#">
-									<i class="fas fa-times"></i>
-								</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="thumbnail-img">
-                                        <a href="#">
-									<img class="img-fluid" src="images/bgit2.png" alt="" />
-								</a>
-                                    </td>
-                                    <td class="name-pr">
-                                        <a href="#">
-                                            Clifton 4 Strings Precision Bass (Sunburst)
-								</a>
-                                    </td>
-                                    <td class="price-pr">
-                                        <p>₱6,300</p>
-                                    </td>
-                                    <td class="quantity-box"><input type="number" size="4" value="1" min="0" step="1" class="c-input-text qty text"></td>
-                                    <td class="total-pr">
-                                        <p>₱6,300</p>
-                                    </td>
-                                    <td class="remove-pr">
-                                        <a href="#">
-									<i class="fas fa-times"></i>
-								</a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+   
+<div class="cart-box-main">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="table-main table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Images</th>
+                                <th>Product Name</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th>Remove</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cart-items">
+                            <!-- Cart items will be displayed here -->
+                        </tbody>
+                    </table>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
 
             <div class="row my-5">
                 <div class="col-lg-6 col-sm-6">
@@ -501,26 +434,65 @@
     <script src="js/contact-form-script.js"></script>
     <script src="js/custom.js"></script>
 </body>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Retrieve cart items from localStorage
-        var cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
 
-        // Display cart items dynamically
-        var dynamicCart = document.getElementById('dynamic-cart');
-        if (cartItems.length > 0) {
-            cartItems.forEach(function (item) {
-                var cartItemElement = document.createElement('li');
-                cartItemElement.innerHTML = `
-                    <a href="#" class="photo"><img src="images/git1.png" class="cart-thumb" alt="" /></a>
-                    <h6><a href="#">${item.productName}</a></h6>
-                    <p>1x - <span class="price">₱${item.price}</span></p>`;
-                dynamicCart.appendChild(cartItemElement);
-            });
-        } else {
-            dynamicCart.innerHTML = '<li>Your cart is empty.</li>';
-        }
-    });
+<script>
+    // Retrieve the cart data from localStorage
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Function to update the cart display
+    function updateCartDisplay() {
+        const tableBody = document.getElementById('cart-items');
+
+        // Clear the current content
+        tableBody.innerHTML = '';
+
+        // Add each item to the cart display
+        cart.forEach(item => {
+            const tableRow = document.createElement('tr');
+            tableRow.innerHTML = `
+                <td class="thumbnail-img">
+                    <a href="#">
+                        <img class="img-fluid" src="${item.image}" alt="${item.productName}" />
+                    </a>
+                </td>
+                <td class="name-pr">
+                    <a href="#">
+                        ${item.productName}
+                    </a>
+                </td>
+                <td class="price-pr">
+                    <p>₱${item.price}</p>
+                </td>
+                <td class="quantity-box"><input type="number" size="4" value="${item.quantity}" min="0" step="1" class="c-input-text qty text"></td>
+                <td class="total-pr">
+                    <p>₱${item.price * item.quantity}</p>
+                </td>
+                <td class="remove-pr">
+                    <a href="#" onclick="removeFromCart('${item.productName}')">
+                        <i class="fas fa-times"></i>
+                    </a>
+                </td>
+            `;
+            tableBody.appendChild(tableRow);
+        });
+    }
+
+    // Function to remove an item from the cart
+    function removeFromCart(productName) {
+        cart = cart.filter(item => item.productName !== productName);
+        updateCartDisplay();
+        updateLocalStorage();
+    }
+
+    // Function to update the cart display initially
+    updateCartDisplay();
+
+    // Function to update localStorage with the current cart data
+    function updateLocalStorage() {
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
 </script>
+
+
 
 </html>
