@@ -441,7 +441,7 @@
 
     // Function to update the cart display
     function updateCartDisplay() {
-        const tableBody = document.getElementById('cart-items');
+        const tableBody = document.querySelector('.table tbody');
 
         // Clear the current content
         tableBody.innerHTML = '';
@@ -452,7 +452,7 @@
             tableRow.innerHTML = `
                 <td class="thumbnail-img">
                     <a href="#">
-                        <img class="img-fluid" src="${item.image}" alt="${item.productName}" />
+                        <img class="img-fluid" src="${item.image}" alt="${item.productName}" style="max-width: 200px; height: auto;" />
                     </a>
                 </td>
                 <td class="name-pr">
@@ -461,11 +461,13 @@
                     </a>
                 </td>
                 <td class="price-pr">
-                    <p>₱${item.price}</p>
+                    <p>₱${formatPrice(item.price)}</p>
                 </td>
-                <td class="quantity-box"><input type="number" size="4" value="${item.quantity}" min="0" step="1" class="c-input-text qty text"></td>
+                <td class="quantity-box">
+                    <input type="number" size="4" value="${item.quantity}" min="0" step="1" class="c-input-text qty text" onchange="updateQuantity('${item.productName}', this.value)">
+                </td>
                 <td class="total-pr">
-                    <p>₱${item.price * item.quantity}</p>
+                    <p>₱${formatPrice(item.price * item.quantity)}</p>
                 </td>
                 <td class="remove-pr">
                     <a href="#" onclick="removeFromCart('${item.productName}')">
@@ -475,6 +477,27 @@
             `;
             tableBody.appendChild(tableRow);
         });
+    }
+
+    // Function to format the price with commas
+    function formatPrice(price) {
+        return price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    // Function to update quantity and recalculate total
+    function updateQuantity(productName, newQuantity) {
+        const item = cart.find(item => item.productName === productName);
+        if (item) {
+            item.quantity = parseInt(newQuantity, 10);
+
+            // Remove item if quantity is zero
+            if (item.quantity === 0) {
+                removeFromCart(productName);
+            } else {
+                updateCartDisplay();
+                updateLocalStorage();
+            }
+        }
     }
 
     // Function to remove an item from the cart
@@ -492,7 +515,5 @@
         localStorage.setItem('cart', JSON.stringify(cart));
     }
 </script>
-
-
 
 </html>
