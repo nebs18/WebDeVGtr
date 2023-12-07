@@ -936,28 +936,39 @@
         <script src="js/contact-form-script.js"></script>
         <script src="js/custom.js"></script>
     </body>
-    <script>
-        function addToCart(productName, price) {
-            // Retrieve the existing cart items from localStorage
-            var cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-    
-            // Add the new product to the cart
-            var newProduct = {
-                productName: productName,
-                price: price
-            };
-            cartItems.push(newProduct);
-    
-            // Save the updated cart items back to localStorage
-            localStorage.setItem('cartItems', JSON.stringify(cartItems));
-    
-            // Display a success message
-            alert('Product successfully added to cart: ' + productName);
-    
-            // Redirect to the cart.html page
-            window.location.href = 'cart.html';
+ <!-- Add this script to your product.html file -->
+<script>
+    // Sample cart to store added items
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Function to add items to the cart
+    function addToCart(productName, price, image) {
+        // Check if the product is already in the cart
+        const existingItem = cart.find(item => item.productName === productName);
+
+        if (existingItem) {
+            // If the product is already in the cart, update the quantity
+            existingItem.quantity++;
+        } else {
+            // If the product is not in the cart, add it with quantity 1
+            cart.push({
+                productName,
+                price,
+                quantity: 1,
+                image,
+            });
         }
-    </script>
+
+        // Update the cart display
+        updateLocalStorage();
+    }
+
+    // Function to update localStorage with the current cart data
+    function updateLocalStorage() {
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
+</script>
+
 
     
     </html>
