@@ -201,8 +201,10 @@
             </div>
         </div>
     </div>
+    
+
     <div class="col-13 d-flex shopping-box">
-        <a href="checkout.html" class="ml-auto btn hvr-hover">Checkout</a>
+        <a href="#" onclick="checkout()" class="ml-auto btn hvr-hover">Checkout</a>
     </div>
     
 
@@ -321,7 +323,7 @@
                             <ul>
                                 <li><a href="about.html">About Us</a></li>
                                 <li><a href="contact-us.html">Customer Service</a></li>
-                                <li><a href="https://www.facebook.com/PIMAGuitars/photos_by" target="_blank">Our Gallery</a></li>
+                                <li><a href="#">Our Sitemap</a></li>
                                                              
                                 
                             </ul>
@@ -418,10 +420,12 @@
                         <i class="fas fa-times"></i>
                     </a>
                 </td>
-                
             `;
             tableBody.appendChild(tableRow);
         });
+
+        // Update the order summary
+        updateOrderSummary();
     }
 
     // Function to format the price with commas
@@ -459,72 +463,75 @@
         if (item) {
             item.checked = !item.checked;
             updateCartDisplay();
+            updateOrderSummary(); // Update the order summary when checkbox status changes
         }
     }
-
-    // Function to handle the checkout process
-    function checkout() {
-        const checkedItems = cart.filter(item => item.checked);
-        if (checkedItems.length > 0) {
-            // Perform checkout for checked items
-            console.log('Checked items:', checkedItems);
-            // Add your checkout logic here
-        } else {
-            alert('Please select at least one item to check out.');
-        }
-    }
-
-    // Function to update the cart display initially
-    updateCartDisplay();
 
     // Function to update localStorage with the current cart data
     function updateLocalStorage() {
         localStorage.setItem('cart', JSON.stringify(cart));
     }
+
     
-    // ... (your existing script)
-
-    // Function to update the order summary
+   
     function updateOrderSummary() {
-        const checkedItems = cart.filter(item => item.checked);
-        const subTotal = checkedItems.reduce((total, item) => total + item.price * item.quantity, 0);
-        const shippingCost = 100; // You can modify this value as needed
-        const grandTotal = subTotal + shippingCost;
+    const checkedItems = cart.filter(item => item.checked);
+    const subTotal = checkedItems.reduce((total, item) => total + item.price * item.quantity, 0);
 
-        // Update the order summary in the HTML
-        document.getElementById('subTotal').textContent = `₱${formatPrice(subTotal)}`;
-        document.getElementById('shippingCost').textContent = `₱${formatPrice(shippingCost)}`;
-        document.getElementById('grandTotal').textContent = `₱${formatPrice(grandTotal)}`;
+    const baseShippingCost = 100; // Fixed base shipping cost
+    const additionalShippingCostPerProduct = 80; // Additional shipping cost for each additional product
+    const additionalShippingCostPerQuantity = 80; // Additional shipping cost for each additional quantity
+
+    // Calculate additional shipping cost based on the number of checked products
+    const additionalProductCost = checkedItems.length > 1 ? (checkedItems.length - 1) * additionalShippingCostPerProduct : 0;
+
+    // Calculate additional shipping cost based on the total quantity
+    const additionalQuantityCost = checkedItems.reduce((total, item) => total + (item.quantity - 1) * additionalShippingCostPerQuantity, 0);
+
+    const shippingCost = baseShippingCost + additionalProductCost + additionalQuantityCost;
+    const grandTotal = subTotal + shippingCost;
+
+    // Update the order summary in the HTML
+    document.getElementById('subTotal').textContent = `₱${formatPrice(subTotal)}`;
+    document.getElementById('shippingCost').textContent = `₱${formatPrice(shippingCost)}`;
+    document.getElementById('grandTotal').textContent = `₱${formatPrice(grandTotal)}`;
+}
+
+
+// Function to toggle the checked status of an item
+function toggleChecked(productName) {
+    const item = cart.find(item => item.productName === productName);
+    if (item) {
+        item.checked = !item.checked;
+        console.log(`Toggled ${productName} - Checked: ${item.checked}`);
+        updateCartDisplay();  // Ensure this function is updating the cart display
+        updateOrderSummary(); // Ensure this function is updating the order summary
     }
+}
 
-    // ... (rest of your existing script)
- 
-    // Function to toggle the checked status of an item
-    function toggleChecked(productName) {
-        const item = cart.find(item => item.productName === productName);
-        if (item) {
-            item.checked = !item.checked;
-            updateCartDisplay();
-            updateOrderSummary(); // Update the order summary when checkbox status changes
+
+
+
+    // Function to handle the checkout process
+    function checkout() {
+        const checkedItems = cart.filter(item => item.checked);
+        if (checkedItems.length > 0) {
+            // Log the checked items for debugging
+            console.log('Checked items:', checkedItems);
+
+            // Redirect to checkout.html with selectedProducts as a URL parameter
+            const selectedProductsParam = encodeURIComponent(JSON.stringify(checkedItems));
+            window.location.href = `checkout.html?selectedProducts=${selectedProductsParam}`;
+        } else {
+            alert('Please select at least one item to check out.');
         }
     }
 
-    // Function to update the order summary
-    function updateOrderSummary() {
-        const checkedItems = cart.filter(item => item.checked);
-        const subTotal = checkedItems.reduce((total, item) => total + item.price * item.quantity, 0);
-        const shippingCost = checkedItems.length > 0 ? 100 : 0; // Set shipping cost only if there are checked items
-        const grandTotal = subTotal + shippingCost;
-
-        // Update the order summary in the HTML
-        document.getElementById('subTotal').textContent = `₱${formatPrice(subTotal)}`;
-        document.getElementById('shippingCost').textContent = `₱${formatPrice(shippingCost)}`;
-        document.getElementById('grandTotal').textContent = `₱${formatPrice(grandTotal)}`;
-    }
-
-
-
-
+    // Call the updateCartDisplay function when the page loads
+    window.onload = function () {
+        updateCartDisplay();
+    };
 </script>
+
 
 </html>
