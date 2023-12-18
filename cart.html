@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="overflow-x: hidden;">
 <!-- Basic -->
 
 <head>
@@ -101,7 +101,7 @@
                             <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">SHOP</a>
                             <ul class="dropdown-menu">
                                 <li><a href="cart.html">Cart</a></li>
-                                <li><a href="checkout.html">Checkout</a></li>
+                               
                                 <li><a href="my-account.html">My Account</a></li>
                                
                             </ul>
@@ -159,8 +159,9 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Images</th>
-                                <th>Product Name</th>
+                                <th></th>
+                                <th>Product</th>
+                                <th>Name</th>
                                 <th>Price</th>
                                 <th>Quantity</th>
                                 <th>Total</th>
@@ -175,33 +176,39 @@
             </div>
         </div>
     </div>
-</div>
-            <div class="row my-5">
-                <div class="col-lg-8 col-sm-12"></div>
-                <div class="col-lg-4 col-sm-12">
-                    <div class="order-box">
-                        <h3>Order summary</h3>
-                        <div class="d-flex">
-                            <h4>Sub Total</h4>
-                            <div class="ml-auto font-weight-bold"> ₱30,700</div>
-                        </div>
-                        
-                        <div class="d-flex">
-                            <h4>Shipping Cost</h4>
-                            <div class="ml-auto font-weight-bold"> ₱100 </div>
-                        </div>
-                        <hr>
-                        <div class="d-flex gr-total">
-                            <h5>Grand Total</h5>
-                            <div class="ml-auto h5"> ₱30,800 </div>
-                        </div>
-                        <hr> </div>
+    <div class="row my-5">
+        <div class="col-lg-8 col-sm-12">
+            <!-- ... (your existing HTML structure) -->
+        </div>
+        <div class="col-lg-4 col-sm-12">
+            <div class="order-box">
+                <h3>Order summary</h3>
+                <div class="d-flex">
+                    <h4>Sub Total</h4>
+                    <div class="ml-auto font-weight-bold" id="subTotal">₱0.00</div>
                 </div>
-                <div class="col-12 d-flex shopping-box"><a href="checkout.html" class="ml-auto btn hvr-hover">Checkout</a> </div>
+    
+                <div class="d-flex">
+                    <h4>Shipping Cost</h4>
+                    <div class="ml-auto font-weight-bold" id="shippingCost">₱0.00</div>
+                </div>
+                <hr>
+                <div class="d-flex gr-total">
+                    <h5>Grand Total</h5>
+                    <div class="ml-auto h5" id="grandTotal">₱0.00</div>
+                </div>
+                <hr>
             </div>
-
         </div>
     </div>
+    <div class="col-13 d-flex shopping-box">
+        <a href="checkout.html" class="ml-auto btn hvr-hover">Checkout</a>
+    </div>
+    
+
+
+        
+    
     <!-- End Cart -->
     <!-- Start Instagram Feed  -->
     <div class="instagram-box">
@@ -385,6 +392,9 @@
         cart.forEach(item => {
             const tableRow = document.createElement('tr');
             tableRow.innerHTML = `
+            <td class="checkbox-pr">
+                    <input type="checkbox" onchange="toggleChecked('${item.productName}')" ${item.checked ? 'checked' : ''}>
+                </td>
                 <td class="thumbnail-img">
                     <a href="#">
                         <img class="img-fluid" src="${item.image}" alt="${item.productName}" style="max-width: 200px; height: auto;" />
@@ -409,6 +419,7 @@
                         <i class="fas fa-times"></i>
                     </a>
                 </td>
+                
             `;
             tableBody.appendChild(tableRow);
         });
@@ -439,8 +450,29 @@
     function removeFromCart(productName) {
         cart = cart.filter(item => item.productName !== productName);
         updateCartDisplay();
-        updateLocalStorage()
-        event.preventDefault();;
+        updateLocalStorage();
+        event.preventDefault();
+    }
+
+    // Function to toggle the checked status of an item
+    function toggleChecked(productName) {
+        const item = cart.find(item => item.productName === productName);
+        if (item) {
+            item.checked = !item.checked;
+            updateCartDisplay();
+        }
+    }
+
+    // Function to handle the checkout process
+    function checkout() {
+        const checkedItems = cart.filter(item => item.checked);
+        if (checkedItems.length > 0) {
+            // Perform checkout for checked items
+            console.log('Checked items:', checkedItems);
+            // Add your checkout logic here
+        } else {
+            alert('Please select at least one item to check out.');
+        }
     }
 
     // Function to update the cart display initially
@@ -450,6 +482,50 @@
     function updateLocalStorage() {
         localStorage.setItem('cart', JSON.stringify(cart));
     }
+    
+    // ... (your existing script)
+
+    // Function to update the order summary
+    function updateOrderSummary() {
+        const checkedItems = cart.filter(item => item.checked);
+        const subTotal = checkedItems.reduce((total, item) => total + item.price * item.quantity, 0);
+        const shippingCost = 100; // You can modify this value as needed
+        const grandTotal = subTotal + shippingCost;
+
+        // Update the order summary in the HTML
+        document.getElementById('subTotal').textContent = `₱${formatPrice(subTotal)}`;
+        document.getElementById('shippingCost').textContent = `₱${formatPrice(shippingCost)}`;
+        document.getElementById('grandTotal').textContent = `₱${formatPrice(grandTotal)}`;
+    }
+
+    // ... (rest of your existing script)
+ 
+    // Function to toggle the checked status of an item
+    function toggleChecked(productName) {
+        const item = cart.find(item => item.productName === productName);
+        if (item) {
+            item.checked = !item.checked;
+            updateCartDisplay();
+            updateOrderSummary(); // Update the order summary when checkbox status changes
+        }
+    }
+
+    // Function to update the order summary
+    function updateOrderSummary() {
+        const checkedItems = cart.filter(item => item.checked);
+        const subTotal = checkedItems.reduce((total, item) => total + item.price * item.quantity, 0);
+        const shippingCost = checkedItems.length > 0 ? 100 : 0; // Set shipping cost only if there are checked items
+        const grandTotal = subTotal + shippingCost;
+
+        // Update the order summary in the HTML
+        document.getElementById('subTotal').textContent = `₱${formatPrice(subTotal)}`;
+        document.getElementById('shippingCost').textContent = `₱${formatPrice(shippingCost)}`;
+        document.getElementById('grandTotal').textContent = `₱${formatPrice(grandTotal)}`;
+    }
+
+
+
+
 </script>
 
 </html>
