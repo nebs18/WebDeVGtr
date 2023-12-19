@@ -181,26 +181,20 @@
                                 <p style="text-align:justify">The NUX Bass Amplifier with 50 Watts in Black is a powerful and versatile amplifier designed specifically for bass players. Featuring a sleek black finish, this amplifier delivers 50 watts of output, making it suitable for rehearsals, gigs, and studio sessions. With intuitive controls including volume, bass, mid, treble, and presence, bassists can finely sculpt their desired tone. The amplifier's robust construction and thoughtful design provide a reliable platform for bass performance. Additional features may include headphone and auxiliary inputs for silent practice and connectivity with external devices. The black color adds a timeless and professional aesthetic to this capable bass amplifier.  </p>
                                 <ul>
                                     <li>
-                                        <div class="form-group size-st">
-                                            <label class="size-label">Color</label>
-                                            <select id="basic" class="selectpicker show-tick form-control">
-									<option value="0">Color</option>
-									<option value="0">Black</option>
+                                       
+									
 								</select>
                                         </div>
                                     </li>
                                     <li>
-                                        <div class="form-group quantity-box">
-                                            <label class="control-label">Quantity</label>
-                                            <input class="form-control" value="0" min="0" max="20" type="number">
-                                        </div>
+                                        
                                     </li>
                                 </ul>
 
                                 <div class="price-box-bar">
                                     <div class="cart-and-bay-btn">
                                         
-                                        <a class="btn hvr-hover" data-fancybox-close="" href="#">Add to cart</a>
+                                        <a class="btn hvr-hover" data-fancybox-close="" onclick="addToCart('NUX Bass Amplifier 50 Watts (Black)', 15500, 'images/amp9.jpg' )" href="#">Add to cart</a>
                                     </div>
                                 </div>
 
@@ -292,6 +286,79 @@
     <script src="js/form-validator.min.js"></script>
     <script src="js/contact-form-script.js"></script>
     <script src="js/custom.js"></script>
+    <script>
+    // Function to show the "Added to Cart" notification
+    function showAddedToCartNotification(productName) {
+        const notification = document.getElementById('added-to-cart-notification');
+        notification.innerText = `${productName} added to cart`;
+        notification.style.display = 'block';
+
+        // Hide the notification after 3 seconds (adjust as needed)
+        setTimeout(() => {
+            notification.style.display = 'none';
+        }, 3000);
+    }
+
+    // Sample cart to store added items
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Function to add items to the cart
+    function addToCart(productName, price, image) {
+        event.preventDefault();
+        // Check if the product is already in the cart
+        const existingItem = cart.find(item => item.productName === productName);
+
+        if (existingItem) {
+            // If the product is already in the cart, update the quantity and image
+            existingItem.quantity++;
+            existingItem.image = image;
+
+            // Show the "Added to Cart" notification
+            showAddedToCartNotification(productName);
+        } else {
+            // If the product is not in the cart, add it with quantity 1 and image
+            cart.push({
+                productName,
+                price,
+                quantity: 1,
+                image,
+            });
+
+            // Show the "Added to Cart" notification
+            showAddedToCartNotification(productName);
+        }
+
+        // Update the cart display
+        updateLocalStorage();
+    }
+
+    // Function to update localStorage with the current cart data
+    function updateLocalStorage() {
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
+    
+</script>
+
+<style>
+    /* Updated styles for centering the notification */
+    #added-to-cart-notification {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 10px;
+        background-color: #28a745;
+        color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        z-index: 1000;
+    }
+</style>
+
+<!-- Add this notification element to your product.html file -->
+<div id="added-to-cart-notification"></div>
 </body>
 
 </html>
