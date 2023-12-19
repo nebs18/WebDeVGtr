@@ -25,20 +25,68 @@
     <!-- Responsive CSS -->
     <link rel="stylesheet" href="css/responsive.css">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 </head>
 
 <body class="goto-here">
 
-    <nav class="navbar navbar-expand-lg  ftco_navbar  ftco-navbar-light" id="ftco-navbar">
-        <div class="container">
-            <a class="navbar-brand" href="index.html">SCDES</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
-                aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="oi oi-menu"></span> Menu
-            </button>
+    <!-- Start Main Top -->
+    <header class="main-header">
+        <!-- Start Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
+            <div class="container">
+                <!-- Start Header Navigation -->
+                <div class="navbar-header">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa fa-bars"></i>
+                </button>
+                    <a class="navbar-brand" href="index.html"><img src="images/logo.png" class="logo" alt=""></a>
+                </div>
+                <!-- End Header Navigation -->
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="navbar-menu">
+                    <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                        <li class="dropdown megamenu-fw">
+                        <li class="nav-item"><a class="nav-link" href="products2.html">Products</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">SHOP</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="cart.html">Cart</a></li>
+                               
+                                <li><a href="my-account.html">My Account</a></li>
+                               
+                            </ul>
+                        </li>
+                        
+                        <li class="nav-item"><a class="nav-link" href="contact-us.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+
+                
+                </div>
+                <!-- End Atribute Navigation -->
+            </div>
+            <!-- Start Side Menu -->
+            <div class="side">
+                <a href="#" class="close-side"><i class="fa fa-times"></i></a>
+                <li class="cart-box">
+                    <ul class="cart-list" id="dynamic-cart">
+                        <!-- Dynamic cart items will be added here -->
+                    </ul>
+                </li>
+            </div>
+            <!-- End Side Menu -->
+        </nav>
+        <!-- End Navigation -->
+    </header>
+    <!-- End Main Top -->
+    
 
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
@@ -68,21 +116,11 @@
 
                 </ul>
             </div>
-        </div>
-    </nav>
+      
+    
     <!-- END nav -->
 
-    <div class="hero-wrap hero-bread" style="background-image: url('images/img9.jpg');">
-        <div class="container">
-            <div class="row no-gutters slider-text align-items-center justify-content-center">
-                <div class="col-md-9 ftco-animate text-center">
-                    <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Products</span>
-                    </p>
-                    <h1 class="mb-0 bread">Products</h1>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
     <section class="ftco-section">
         <!-- <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
@@ -238,24 +276,6 @@
             </div> -->
     </section>
 
-    <section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
-        <div class="container py-4">
-            <div class="row d-flex justify-content-center py-5">
-                <div class="col-md-6">
-                    <h2 style="font-size: 22px;" class="mb-0">Subcribe to our Newsletter</h2>
-                    <span>Get e-mail updates about our latest shops and special offers</span>
-                </div>
-                <div class="col-md-6 d-flex align-items-center">
-                    <form action="#" class="subscribe-form">
-                        <div class="form-group d-flex">
-                            <input type="text" class="form-control" placeholder="Enter email address">
-                            <input type="submit" value="Subscribe" class="submit px-3">
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
   <!-- Start Footer  -->
   <footer>
     <div class="footer-main">
@@ -699,6 +719,7 @@
     <script src="js/jquery.animateNumber.min.js"></script>
     <script src="js/bootstrap-datepicker.js"></script>
     <script src="js/scrollax.min.js"></script>
+    <script src="js/custom.js"></script>
 
     <script src="js/main.js"></script>
 
