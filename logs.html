@@ -1,78 +1,85 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Log-in | Sign-up</title>
-        <link rel="stylesheet" type="text/css" href="stayl.css">
-        <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
-    </head>
-    <body>
-        <div class="main">
-            <input type="checkbox" id="chk" aria-hidden="true">
 
-            <div class="signup">
-                <form id="MainForm">
-                    <label for="chk" aria-hidden="true">Login User</label>
-                    <input type="email" class="form-control" id="emailInp" name="email" placeholder="Email">
-                    <input type="password" class="form-control" id="passwordInp" name="pswd" placeholder="Password">
-                    <button type="submit" class="btn btn-primary" name="signup_submit">Login </button>
-                    <a href="sign-up.html"><button type="button" style="display: inline, center;" class="login_button" id="login" name="login_button">Create Account?</button></a>
-                </form>
-            </div>
-        </div>
-        <br><br><br>
-        <br>
-        <br>
-    </body>
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getDatabase, get, ref, child } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-    
-        const firebaseConfig = {
-          apiKey: "AIzaSyCdJ18MNp1wBnGP5YM3penvsjqp8o5wvkM",
-          authDomain: "auth-ddcad.firebaseapp.com",
-          databaseURL: "https://auth-ddcad-default-rtdb.firebaseio.com",
-          projectId: "auth-ddcad",
-          storageBucket: "auth-ddcad.appspot.com",
-          messagingSenderId: "632550091518",
-          appId: "1:632550091518:web:1afe4024d4a13a882653af"
-        };
-    
-        const app = initializeApp(firebaseConfig);
-        const db = getDatabase();
-        const auth = getAuth(app);
-        const dbref = ref(db);
-    
-        let EmailInp = document.getElementById('emailInp');
-        let PassInp = document.getElementById('passwordInp');
-        let MainForm = document.getElementById('MainForm');
-    
-        let SignInUser = evt => {
-          evt.preventDefault();
-    
-          signInWithEmailAndPassword(auth, EmailInp.value, PassInp.value)
-            .then((credentials) => {
-    
-              alert('Account login successfully!');
-              get(child(dbref, 'UsersAuthList/' + credentials.user.uid)).then((snapshot) => {
-                if (snapshot.exists) {
-                    sessionStorage.setItem("user-info", JSON.stringify({
-                      firstname: snapshot.val().firstname,
-                      lastname: snapshot.val().lastname
-                  }))
-                  sessionStorage.setItem("user-creds", JSON.stringify(credentials.user));
-                  window.location.href = 'index.html';
-                }
-              })
-              MainForm.reset();
-            })
-            .catch((error) => {
-              alert(error.message);
-              console.log(error.code);
-              console.log(error.message);
-            });
-        };
-    
-        MainForm.addEventListener('submit', SignInUser)
-      </script>
+<head>
+  <title>Log-in | Sign-up</title>
+  <link rel="stylesheet" type="text/css" href="stayl.css">
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="main">
+    <input type="checkbox" id="chk" aria-hidden="true">
+
+    <div class="signup">
+      <form id="MainForm">
+        <label for="chk" aria-hidden="true">Login User</label>
+        <input type="email" class="form-control" id="emailInp" name="email" placeholder="Email">
+        <input type="password" class="form-control" id="passwordInp" name="pswd" placeholder="Password">
+        <button type="submit" class="btn btn-primary" name="signup_submit">Login </button>
+        <a href="sign-up.html"><button type="button" style="display: inline, center;" class="login_button" id="login"
+            name="login_button">Create Account?</button></a>
+      </form>
+    </div>
+  </div>
+  <br><br><br>
+  <br>
+  <br>
+</body>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getDatabase, ref, child, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+  import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCdJ18MNp1wBnGP5YM3penvsjqp8o5wvkM",
+    authDomain: "auth-ddcad.firebaseapp.com",
+    databaseURL: "https://auth-ddcad-default-rtdb.firebaseio.com",
+    projectId: "auth-ddcad",
+    storageBucket: "auth-ddcad.appspot.com",
+    messagingSenderId: "632550091518",
+    appId: "1:632550091518:web:1afe4024d4a13a882653af"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+  const auth = getAuth(app);
+  const dbref = ref(db);
+
+  let EmailInp = document.getElementById('emailInp');
+  let PassInp = document.getElementById('passwordInp');
+  let MainForm = document.getElementById('MainForm');
+
+  let SignInUser = evt => {
+    evt.preventDefault();
+
+    signInWithEmailAndPassword(auth, EmailInp.value, PassInp.value)
+      .then((userCredential) => {
+        const user = userCredential.user;
+
+        alert('Account login successfully!');
+        get(child(dbref, 'UsersAuthList/' + user.uid)).then((snapshot) => {
+          if (snapshot.exists()) {
+            const userInfo = {
+              firstname: snapshot.val().firstname,
+              lastname: snapshot.val().lastname
+            };
+            sessionStorage.setItem("user-info", JSON.stringify(userInfo));
+            sessionStorage.setItem("user-credentials", JSON.stringify(userCredential.user));
+            window.location.href = 'index.html';
+          }
+        });
+
+        MainForm.reset();
+      })
+      .catch((error) => {
+        alert(error.message);
+        console.error("Error during login:", error);
+      });
+  };
+
+  MainForm.addEventListener('submit', SignInUser);
+</script>
+  
+
 </html>
