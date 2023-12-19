@@ -325,16 +325,17 @@
                                         <label class="custom-control-label" for="shippingOption1">Standard Delivery</label> <span class="float-right font-weight-bold">₱100</span> </div>
                                     <div class="ml-4 mb-2 small">(3-5 business days)</div>
                         </div>
-                        <div class="col-md-12 col-lg-12">
-                            <div class="odr-box">
-                                <div class="title-left">
-                                    <h3>Shopping cart</h3>
-                                </div>
-                                <div class="rounded p-2 bg-light" id="productList">
-                                    <!-- Products will be dynamically added here -->
+                    
+                            <div class="col-md-12 col-lg-12">
+                                <div class="odr-box">
+                                    <div class="title-left">
+                                        <h3>Shopping cart</h3>
+                                    </div>
+                                    <div class="rounded p-2 bg-light" id="productList">
+                                        <!-- Products will be dynamically added here -->
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         <div class="col-md-12 col-lg-12">
                             <div class="order-box">
                                 <div class="title-left">
@@ -451,132 +452,161 @@
     <script src="js/custom.js"></script>
    <!-- ... (your existing HTML structure) -->
    <script>
-    // Retrieve the cart data from localStorage
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+//     // Retrieve the cart data from localStorage
+//     let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-    // Function to format the price with commas
-    function formatPrice(price) {
-        return price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    }
+//     // Function to format the price with commas
+//     function formatPrice(price) {
+//         return price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+//     }
 
-    // Function to update the order summary
-    function updateOrderSummary() {
-        const checkedItems = cart.filter(item => item.checked);
-        console.log(checkedItems); // Add this line to check the contents of checkedItems
+//     // Function to update the order summary
+//     function updateOrderSummary() {
+//         const checkedItems = cart.filter(item => item.checked);
+//         console.log(checkedItems); // Add this line to check the contents of checkedItems
 
-        const productListContainer = document.getElementById('productList');
-        productListContainer.innerHTML = ''; // Clear existing content
+//         const productListContainer = document.getElementById('productList');
+//         productListContainer.innerHTML = ''; // Clear existing content
 
-        checkedItems.forEach(product => {
-            const productItem = document.createElement('div');
-            productItem.className = 'media mb-2 border-bottom';
-            productItem.innerHTML = `
-                <div class="media-body">
-                    <a href="detail.html">${product.productName}</a>
-                    <div class="small text-muted">
-                        Price: ₱${formatPrice(product.price)} |
-                        Qty: ${product.quantity} |
-                        Subtotal: ₱${formatPrice(product.price * product.quantity)}
-                    </div>
-                </div>
-            `;
-            productListContainer.appendChild(productItem);
+//         checkedItems.forEach(product => {
+//             const productItem = document.createElement('div');
+//             productItem.className = 'media mb-2 border-bottom';
+//             productItem.innerHTML = `
+//                 <div class="media-body">
+//                     <a href="detail.html">${product.productName}</a>
+//                     <div class="small text-muted">
+//                         Price: ₱${formatPrice(product.price)} |
+//                         Qty: ${product.quantity} |
+//                         Subtotal: ₱${formatPrice(product.price * product.quantity)}
+//                     </div>
+//                 </div>
+//             `;
+//             productListContainer.appendChild(productItem);
+//         });
+
+//         // Calculate and update the order summary
+//         const subTotal = checkedItems.reduce((total, item) => total + item.price * item.quantity, 0);
+//         const shippingCost = checkedItems.length > 0 ? 100 : 0;
+//         const grandTotal = subTotal + shippingCost;
+
+//         // Update the order summary in the HTML
+//         document.getElementById('subTotal').textContent = `₱${formatPrice(subTotal)}`;
+//         document.getElementById('shippingCost').textContent = `₱${formatPrice(shippingCost)}`;
+//         document.getElementById('grandTotal').textContent = `₱${formatPrice(grandTotal)}`;
+//     }
+
+//     window.onload = function () {
+//         // Initialize the cart if not already done
+//         if (!cart || !Array.isArray(cart)) {
+//             cart = [];
+//         }
+
+//         // Get the URL parameters
+//         const urlParams = new URLSearchParams(window.location.search);
+//         const selectedProductsParam = urlParams.get('selectedProducts');
+
+//         if (selectedProductsParam) {
+//             // Parse the selected products from the URL parameter
+//             const selectedProducts = JSON.parse(decodeURIComponent(selectedProductsParam));
+
+//             // Add selected products to the cart
+//             cart = selectedProducts;
+//             updateLocalStorage();
+
+//             // Display the selected products on the page
+//             updateOrderSummary();
+//         }
+//     };
+
+//     // Function to update localStorage with the current cart data
+//     function updateLocalStorage() {
+//         localStorage.setItem('cart', JSON.stringify(cart));
+//     }
+//     // Function to update the order summary
+// // Function to update the order summary
+
+//     // ... (previous code)
+//     function updateOrderSummarytotal() {
+//     const checkedItems = cart.filter(item => item.checked);
+//     const { subTotal, shippingCost, grandTotal } = calculateOrderSummary(checkedItems);
+
+//     console.log('Subtotal:', subTotal);
+//     console.log('Shipping Cost:', shippingCost);
+
+//     // Update the order summary in the HTML
+//     document.getElementById('subTotal').textContent = `₱${formatPrice(subTotal)}`;
+//     document.getElementById('shippingCost').textContent = `₱${formatPrice(shippingCost)}`;
+//     document.getElementById('grandTotal').textContent = `₱${formatPrice(grandTotal)}`;
+//     document.getElementById('orderTotal').textContent = `Total: ₱${formatPrice(grandTotal)}`;
+// }
+
+// // Function to update the order summary
+// // Function to update the order summary
+// function updateOrderSummarytotal() {
+//     const checkedItems = cart.filter(item => item.checked);
+//     const { subTotal, shippingCost, grandTotal } = calculateOrderSummary(checkedItems);
+
+//     console.log('Subtotal:', subTotal);
+//     console.log('Shipping Cost:', shippingCost);
+
+//     // Update the order summary in the HTML
+//     document.getElementById('subTotal').textContent = `₱${formatPrice(subTotal)}`;
+//     document.getElementById('shippingCost').textContent = `₱${formatPrice(shippingCost)}`;
+//     document.getElementById('grandTotal').textContent = `₱${formatPrice(grandTotal)}`;
+//     document.getElementById('orderTotal').textContent = `Total: ₱${formatPrice(grandTotal)}`;
+// }
+
+// // Function to calculate order summary
+// function calculateOrderSummary(products) {
+//     const subTotal = products.reduce((total, item) => total + item.price * item.quantity, 0);
+
+//     const baseShippingCost = 100; // Fixed base shipping cost
+//     const additionalShippingCostPerProduct = 80; // Additional shipping cost for each additional product
+//     const additionalShippingCostPerQuantity = 80; // Additional shipping cost for each additional quantity
+
+//     // Calculate additional shipping cost based on the number of selected products
+//     const additionalProductCost = products.length > 1 ? (products.length - 1) * additionalShippingCostPerProduct : 0;
+
+//     // Calculate additional shipping cost based on the total quantity
+//     const additionalQuantityCost = products.reduce((total, item) => total + (item.quantity - 1) * additionalShippingCostPerQuantity, 0);
+
+//     const shippingCost = baseShippingCost + additionalProductCost + additionalQuantityCost;
+//     const grandTotal = subTotal + shippingCost;
+
+//     return { subTotal, shippingCost, grandTotal };
+// }
+// ``
+
+document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const cartInfoParam = urlParams.get('cartInfo');
+
+            if (cartInfoParam) {
+                const cartInfo = JSON.parse(decodeURIComponent(cartInfoParam));
+                const productListDiv = document.getElementById('productList');
+
+                for (const productId in cartInfo) {
+                    const productData = cartInfo[productId].productData;
+                    const quantity = cartInfo[productId].quantity;
+
+                    const productDiv = document.createElement('div');
+                    productDiv.classList.add('product-item');
+
+                    productDiv.innerHTML = `
+                        <div class="product-details">
+                            <h2>${productData.productName}</h2>
+                            <p>Price: ${productData.price}</p>
+                            <p>Quantity: ${quantity}</p>
+                            <p>Total: ${(parseFloat(productData.price) * quantity).toFixed(2)}</p><br>
+                        </div>
+                    `;
+
+                    productListDiv.appendChild(productDiv);
+                }
+            } else {
+                console.error('Cart information not found in the URL parameters.');
+            }
         });
-
-        // Calculate and update the order summary
-        const subTotal = checkedItems.reduce((total, item) => total + item.price * item.quantity, 0);
-        const shippingCost = checkedItems.length > 0 ? 100 : 0;
-        const grandTotal = subTotal + shippingCost;
-
-        // Update the order summary in the HTML
-        document.getElementById('subTotal').textContent = `₱${formatPrice(subTotal)}`;
-        document.getElementById('shippingCost').textContent = `₱${formatPrice(shippingCost)}`;
-        document.getElementById('grandTotal').textContent = `₱${formatPrice(grandTotal)}`;
-    }
-
-    window.onload = function () {
-        // Initialize the cart if not already done
-        if (!cart || !Array.isArray(cart)) {
-            cart = [];
-        }
-
-        // Get the URL parameters
-        const urlParams = new URLSearchParams(window.location.search);
-        const selectedProductsParam = urlParams.get('selectedProducts');
-
-        if (selectedProductsParam) {
-            // Parse the selected products from the URL parameter
-            const selectedProducts = JSON.parse(decodeURIComponent(selectedProductsParam));
-
-            // Add selected products to the cart
-            cart = selectedProducts;
-            updateLocalStorage();
-
-            // Display the selected products on the page
-            updateOrderSummary();
-        }
-    };
-
-    // Function to update localStorage with the current cart data
-    function updateLocalStorage() {
-        localStorage.setItem('cart', JSON.stringify(cart));
-    }
-    // Function to update the order summary
-// Function to update the order summary
-
-    // ... (previous code)
-    function updateOrderSummarytotal() {
-    const checkedItems = cart.filter(item => item.checked);
-    const { subTotal, shippingCost, grandTotal } = calculateOrderSummary(checkedItems);
-
-    console.log('Subtotal:', subTotal);
-    console.log('Shipping Cost:', shippingCost);
-
-    // Update the order summary in the HTML
-    document.getElementById('subTotal').textContent = `₱${formatPrice(subTotal)}`;
-    document.getElementById('shippingCost').textContent = `₱${formatPrice(shippingCost)}`;
-    document.getElementById('grandTotal').textContent = `₱${formatPrice(grandTotal)}`;
-    document.getElementById('orderTotal').textContent = `Total: ₱${formatPrice(grandTotal)}`;
-}
-
-// Function to update the order summary
-// Function to update the order summary
-function updateOrderSummarytotal() {
-    const checkedItems = cart.filter(item => item.checked);
-    const { subTotal, shippingCost, grandTotal } = calculateOrderSummary(checkedItems);
-
-    console.log('Subtotal:', subTotal);
-    console.log('Shipping Cost:', shippingCost);
-
-    // Update the order summary in the HTML
-    document.getElementById('subTotal').textContent = `₱${formatPrice(subTotal)}`;
-    document.getElementById('shippingCost').textContent = `₱${formatPrice(shippingCost)}`;
-    document.getElementById('grandTotal').textContent = `₱${formatPrice(grandTotal)}`;
-    document.getElementById('orderTotal').textContent = `Total: ₱${formatPrice(grandTotal)}`;
-}
-
-// Function to calculate order summary
-function calculateOrderSummary(products) {
-    const subTotal = products.reduce((total, item) => total + item.price * item.quantity, 0);
-
-    const baseShippingCost = 100; // Fixed base shipping cost
-    const additionalShippingCostPerProduct = 80; // Additional shipping cost for each additional product
-    const additionalShippingCostPerQuantity = 80; // Additional shipping cost for each additional quantity
-
-    // Calculate additional shipping cost based on the number of selected products
-    const additionalProductCost = products.length > 1 ? (products.length - 1) * additionalShippingCostPerProduct : 0;
-
-    // Calculate additional shipping cost based on the total quantity
-    const additionalQuantityCost = products.reduce((total, item) => total + (item.quantity - 1) * additionalShippingCostPerQuantity, 0);
-
-    const shippingCost = baseShippingCost + additionalProductCost + additionalQuantityCost;
-    const grandTotal = subTotal + shippingCost;
-
-    return { subTotal, shippingCost, grandTotal };
-}
-``
-
-
 
 
 

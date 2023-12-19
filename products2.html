@@ -189,7 +189,8 @@
                                             <span>Total</span>
                                             <div id="totalPrice"></div>
                                         </div>
-                                        <div class="col">
+                                        <div class="col text-right">
+                                            <!-- Use the "text-right" class to align the content to the right(right) -->
                                             <div class="btn btn-success" id="checkout_btn">Checkout</div>
                                         </div>
                                     </div>
@@ -197,6 +198,7 @@
                             </div>
                         </form>
                     </div>
+                    
                 </div>
             </div>
         </div>
@@ -767,6 +769,22 @@
                 }
             });
         });
+        // Assuming this script is included after the button element
+
+
+// Assuming this script is included after the button element
+
+
+checkoutButton.addEventListener('click', () => {
+    // Encode the cart information as a URL parameter
+    const cartInfo = encodeURIComponent(JSON.stringify(cartItems)); // Assuming cartItems contains your order information
+
+    // Redirect to checkout.html with the cart information as a parameter
+    window.location.href = `checkout.html?cartInfo=${cartInfo}`;
+});
+
+
+        
 
 
     </script>
