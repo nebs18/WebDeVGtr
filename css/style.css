@@ -982,13 +982,13 @@
 /* Responsive Styles for Small Devices (Phones) */
 @media only screen and (max-width: 600px) {
     .filter-button-group {
-        display: block; /* Change to block for stacking on small screens */
-        text-align: center; /* Center buttons */
+        display: block;
+        text-align: center;
     }
 
     .filter-button-group button {
-        display: block; /* Change to block for stacking on small screens */
-        margin: 5px auto; /* Add margin for spacing between buttons */
+        display: inline-block; /* Change back to inline-block for small screens */
+        margin: 5px; /* Add margin for spacing between buttons */
     }
 }
 
@@ -997,7 +997,8 @@
     /* Add any specific styles for larger devices if needed */
 }
 
-}
+
+
  .products-single {
      overflow: hidden;
      position: relative;
