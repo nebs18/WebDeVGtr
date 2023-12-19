@@ -987,9 +987,9 @@
     }
 
     .filter-button-group button {
-        display: inline-block; /* Change back to inline-block for small screens */
-        margin: 5px; /* Add margin for spacing between buttons */
-        margin-top: 10px;
+        display: block;
+        width: 100%; /* Make buttons full width to prevent overlay */
+        margin: 5px 0; /* Add margin for spacing between buttons */
     }
 }
 
@@ -997,6 +997,7 @@
 @media only screen and (min-width: 601px) {
     /* Add any specific styles for larger devices if needed */
 }
+
 
 
 
