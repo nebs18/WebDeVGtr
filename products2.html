@@ -156,37 +156,37 @@
 			Button with data-bs-target
 		  </button> -->
 
-        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample"
-            aria-labelledby="offcanvasExampleLabel">
-            <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasExampleLabel">Cart</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-                <form action="" id="form_cart">
-
-                    <div id="cart_container">
-
+          <div class="container">
+            <div class="row justify-content-center">
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasExampleLabel">Cart</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                     </div>
-
-                    <div class="checkout-container">
-                        <div class="checkout">
-                            <div class="row">
-                                <div class="col">
-                                    <span>Total</span>
-                                    <div id="totalPrice"></div>
-                                </div>
-                                <div class="col">
-                                    <div class="btn btn-success" id="checkout_btn">Checkout</div>
+                    <div class="offcanvas-body">
+                        <form action="" id="form_cart">
+                            <div id="cart_container">
+                                <!-- Cart items will be dynamically added here -->
+                            </div>
+                            <div class="checkout-container">
+                                <div class="checkout">
+                                    <div class="row">
+                                        <div class="col">
+                                            <span>Total</span>
+                                            <div id="totalPrice"></div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="btn btn-success" id="checkout_btn">Checkout</div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
-
-                </form>
+                </div>
             </div>
         </div>
-
+        
         <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
             tabindex="-1">
             <div class="modal-dialog modal-dialog-centered modal-xl">
