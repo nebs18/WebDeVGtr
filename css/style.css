@@ -72,6 +72,7 @@
     position: relative;
 }
 
+/* Common Styles for all screen sizes */
 .mySlides {
     display: none;
 }
@@ -89,7 +90,6 @@
     display: block; /* Remove extra space below inline-block elements */
     margin: 0 auto; /* Center the image horizontally */
 }
-
 .prev {
     position: absolute;
     top: 50%;
@@ -116,8 +116,6 @@
     border-radius: 5px;
 }
 
-
-
 .dot {
     height: 15px;
     width: 15px;
@@ -143,22 +141,42 @@
     font-size: 18px;
     color: #555;
 }
-/* Add this to your CSS stylesheet */
-.prev, .next {
-    position: absolute;
-    top: 50%;
-    font-size: 24px;
-    cursor: pointer;
-    color: #fff;
-    user-select: none;
+
+/* Responsive Styles for Small Devices (Phones) */
+@media only screen and (max-width: 600px) {
+    .slide-content {
+        height: auto; /* Adjust height for smaller screens */
+    }
+
+    .slide-image {
+        width: 100%; /* Set image to 100% width for responsiveness */
+    }
+
+    .prev, .next {
+        font-size: 18px; /* Adjust button font size for smaller screens */
+    }
+
+    .next {
+        right: 20px; /* Ensure the next button is on the right side */
+        left: auto; /* Reset the left property */
+    }
+
+    .tips-section {
+        padding: 20px 0; /* Adjust padding for tips section on smaller screens */
+    }
+
+    .tips-label {
+        font-size: 24px; /* Adjust label font size for smaller screens */
+    }
+
+    .tips-text {
+        font-size: 16px; /* Adjust text font size for smaller screens */
+    }
 }
 
-.prev {
-    left: 20px;
-}
-
-.next {
-    right: 20px;
+/* Responsive Styles for Larger Devices (Laptops) */
+@media only screen and (min-width: 601px) {
+    /* Add any specific styles for larger devices if needed */
 }
 
 
