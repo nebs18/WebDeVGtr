@@ -989,6 +989,7 @@
     .filter-button-group button {
         display: inline-block; /* Change back to inline-block for small screens */
         margin: 5px; /* Add margin for spacing between buttons */
+        margin-top: 10px;
     }
 }
 
