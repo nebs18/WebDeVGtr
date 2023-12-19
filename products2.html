@@ -30,6 +30,8 @@
 
 </head>
 
+
+
 <body class="goto-here">
     <!-- Start Main Top -->
     <div class="main-top">
@@ -99,7 +101,7 @@
                         </li>
                         
                         <li class="nav-item"><a class="nav-link" href="contact-us.html">Contact Us</a></li>
-                        <li> <a href="cart.html" class="fa fa-shopping-bag"></class=></a></li>
+                        <li> <a href="cart.html" class="fa fa-shopping-bag"></class=></a> </li>
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -126,19 +128,7 @@
 
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active"><a href="index.html" class="nav-link ">Home</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">Shop</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdown04">
-                            <a class="dropdown-item active" href="shop.html">Products</a>
-                            <a class="dropdown-item" href="cart.html">Cart</a>
-                            <a class="dropdown-item" href="checkout.html">Checkout</a>
-                        </div>
-                    </li>
-                    <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-                    <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-
+                    
                     <li class="nav-item cta cta-colored"><a class="nav-link" data-bs-toggle="offcanvas"
                             href="#offcanvasExample" role="button" aria-controls="offcanvasExample"><span
                                 class="icon-shopping_cart">Cart</span><span id="cart_count"></span></a></li>
@@ -157,6 +147,45 @@
     <!-- END nav -->
 
 
+
+    
+        <!-- <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+			Link with href
+		  </a> -->
+        <!-- <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+			Button with data-bs-target
+		  </button> -->
+
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample"
+            aria-labelledby="offcanvasExampleLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasExampleLabel">Cart</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <form action="" id="form_cart">
+
+                    <div id="cart_container">
+
+                    </div>
+
+                    <div class="checkout-container">
+                        <div class="checkout">
+                            <div class="row">
+                                <div class="col">
+                                    <span>Total</span>
+                                    <div id="totalPrice"></div>
+                                </div>
+                                <div class="col">
+                                    <div class="btn btn-success" id="checkout_btn">Checkout</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
 
         <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
             tabindex="-1">
@@ -271,7 +300,7 @@
                     </div>
                 </div>
             </div> -->
-    </section>
+
 
   
    
@@ -471,80 +500,76 @@
         };
 
         const addToCart = (productId, productData) => {
-    const cartItemId = `${productId}_cart_item`;
+            const cartItemId = `${productId}_cart_item`;
 
-    if (!userCredentials) {
-        alert('Please sign in to add items to your cart.');
-        window.location.href = 'logs.html';
-        return;
-    }
+            if (!userCredentials) {
+                alert('Please sign in to add items to your cart.');
+                window.location.href = 'logs.html';
+                return;
+            }
 
-    const userCartRef = ref(db, `UserAuthList/${userCredentials.uid}/cart/${productId}`);
+            const userCartRef = ref(db, `UserAuthList/${userCredentials.uid}/cart/${productId}`);
 
-    if (cartItems[productId]) {
-        const updatedQuantity = cartItems[productId].quantity + 1;
-        set(userCartRef, { productData, quantity: updatedQuantity })
-            .then(() => {
-                cartItems[productId].quantity = updatedQuantity;
-                const quantityInput = document.getElementById(`${cartItemId}_quantity`);
-                if (quantityInput) {
-                    quantityInput.value = updatedQuantity;
+            if (cartItems[productId]) {
+                const updatedQuantity = cartItems[productId].quantity + 1;
+                set(userCartRef, { productData, quantity: updatedQuantity })
+                    .then(() => {
+                        cartItems[productId].quantity = updatedQuantity;
+                        const quantityInput = document.getElementById(`${cartItemId}_quantity`);
+                        if (quantityInput) {
+                            quantityInput.value = updatedQuantity;
 
-                    quantityInput.addEventListener('input', () => {
-                        const quantity = parseInt(quantityInput.value, 10);
-                        cartItems[productId].quantity = quantity;
-                        const updatedPrice = quantity * parseFloat(productData.price);
-                        document.getElementById(`price_${cartItemId}`).innerHTML = updatedPrice.toFixed(2);
+                            // Check if quantityInput exists before adding the event listener
+                            quantityInput.addEventListener('input', () => {
+                                const quantity = parseInt(quantityInput.value, 10);
+                                cartItems[productId].quantity = quantity;
+                                const updatedPrice = quantity * parseFloat(productData.price);
+                                document.getElementById(`price_${cartItemId}`).innerHTML = updatedPrice.toFixed(2);
+                                updateTotalPrice();
+                            });
+                        }
+
                         updateTotalPrice();
+                        updateCartCounter();
+                    })
+                    .catch((error) => {
+                        console.error("Error updating quantity in the database:", error);
                     });
-                }
+            } else {
+                set(userCartRef, { productId, productData, quantity: 1 })
+                    .then(() => {
+                        cartItems[productId] = { productData, quantity: 1 };
+                        const cartItem = document.createElement('div');
+                        cartItem.classList.add('col', 'addedToCart', 'border', 'border-primary');
+                        cartItem.id = cartItemId;
+                        cartContainer.appendChild(cartItem);
+                        const quantityInput = document.getElementById(`${cartItemId}_quantity`);
+                        if (quantityInput) {
+                            quantityInput.addEventListener('input', () => {
+                                const quantity = parseInt(quantityInput.value, 10);
+                                cartItems[productId].quantity = quantity;
+                                const updatedPrice = quantity * parseFloat(productData.price);
+                                document.getElementById(`price_${cartItemId}`).innerHTML = updatedPrice.toFixed(2);
+                                updateTotalPrice();
+                            });
+                        }
 
-                updateTotalPrice();
-                updateCartCounter();
+                        const removeButton = cartItem.querySelector('._remove-cart');
+                        removeButton.addEventListener('click', () => {
+                            removeFromCart(productId, cartItemId);
+                        });
 
-                // Redirect to cart.html after adding to the cart
-                window.location.href = 'cart.html';
-            })
-            .catch((error) => {
-                console.error("Error updating quantity in the database:", error);
-            });
-    } else {
-        set(userCartRef, { productId, productData, quantity: 1 })
-            .then(() => {
-                cartItems[productId] = { productData, quantity: 1 };
-                const cartItem = document.createElement('div');
-                cartItem.classList.add('col', 'addedToCart', 'border', 'border-primary');
-                cartItem.id = cartItemId;
-                cartContainer.appendChild(cartItem);
-                const quantityInput = document.getElementById(`${cartItemId}_quantity`);
-                if (quantityInput) {
-                    quantityInput.addEventListener('input', () => {
-                        const quantity = parseInt(quantityInput.value, 10);
-                        cartItems[productId].quantity = quantity;
-                        const updatedPrice = quantity * parseFloat(productData.price);
-                        document.getElementById(`price_${cartItemId}`).innerHTML = updatedPrice.toFixed(2);
                         updateTotalPrice();
+                        updateCartCounter();
+                    })
+                    .catch((error) => {
+                        console.error("Error adding item to the database:", error);
                     });
-                }
+            }
+            console.log(productData);
+            alert('Item Added to Cart');
+        };
 
-                const removeButton = cartItem.querySelector('._remove-cart');
-                removeButton.addEventListener('click', () => {
-                    removeFromCart(productId, cartItemId);
-                });
-
-                updateTotalPrice();
-                updateCartCounter();
-
-                // Redirect to cart.html after adding to the cart
-                window.location.href = 'cart.html';
-            })
-            .catch((error) => {
-                console.error("Error adding item to the database:", error);
-            });
-    }
-    console.log(productData);
-    alert('Item Added to Cart');
-};
 
         const updateCartUI = () => {
             cartContainer.innerHTML = '';
