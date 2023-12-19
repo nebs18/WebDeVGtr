@@ -776,12 +776,19 @@
 
 
 checkoutButton.addEventListener('click', () => {
+    // Check if the cart is empty
+    if (Object.keys(cartItems).length === 0) {
+        alert('There are no items in the cart. Add products to the cart before checking out.');
+        return; // Don't proceed to checkout
+    }
+
     // Encode the cart information as a URL parameter
-    const cartInfo = encodeURIComponent(JSON.stringify(cartItems)); // Assuming cartItems contains your order information
+    const cartInfo = encodeURIComponent(JSON.stringify(cartItems));
 
     // Redirect to checkout.html with the cart information as a parameter
     window.location.href = `checkout.html?cartInfo=${cartInfo}`;
 });
+
 
 
         

@@ -95,14 +95,10 @@
                         <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
                         <li class="dropdown megamenu-fw">
-                        <li class="nav-item"><a class="nav-link" href="products2.html">Our Products</a></li>
+                        <li class="nav-item"><a class="nav-link" href="products2.html">Shop Products</a></li>
                         <li class="dropdown">
 
-                            <ul class="dropdown-menu">
-                                <li><a href="products2.html">Cart</a></li>
-                                <li><a href="checkout.html">Checkout</a></li>
-                                <li><a href="my-account.html"></a></li>
-                                
+                            
                                
                             </ul>
                         </li>
@@ -141,48 +137,7 @@
     <!-- Start Cart  -->
     <div class="cart-box-main">
         <div class="container">
-            <div class="row new-account-login">
-                <div class="col-sm-6 col-lg-6 mb-3">
-                    <div class="title-left">
-                        <h3>Account Login</h3>
-                    </div>
-                    <h5><a data-toggle="collapse" href="#formLogin" role="button" aria-expanded="false">Click here to Login</a></h5>
-                    <form class="mt-3 collapse review-form-box" id="formLogin">
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="InputEmail" class="mb-0">Email Address</label>
-                                <input type="email" class="form-control" id="InputEmail" placeholder="Enter Email"> </div>
-                            <div class="form-group col-md-6">
-                                <label for="InputPassword" class="mb-0">Password</label>
-                                <input type="password" class="form-control" id="InputPassword" placeholder="Password"> </div>
-                        </div>
-                        <button type="submit" class="btn hvr-hover">Login</button>
-                    </form>
-                </div>
-                <div class="col-sm-6 col-lg-6 mb-3">
-                    <div class="title-left">
-                        <h3>Create New Account</h3>
-                    </div>
-                    <h5><a data-toggle="collapse" href="#formRegister" role="button" aria-expanded="false">Click here to Register</a></h5>
-                    <form class="mt-3 collapse review-form-box" id="formRegister">
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="InputName" class="mb-0">First Name</label>
-                                <input type="text" class="form-control" id="InputName" placeholder="First Name"> </div>
-                            <div class="form-group col-md-6">
-                                <label for="InputLastname" class="mb-0">Last Name</label>
-                                <input type="text" class="form-control" id="InputLastname" placeholder="Last Name"> </div>
-                            <div class="form-group col-md-6">
-                                <label for="InputEmail1" class="mb-0">Email Address</label>
-                                <input type="email" class="form-control" id="InputEmail1" placeholder="Enter Email"> </div>
-                            <div class="form-group col-md-6">
-                                <label for="InputPassword1" class="mb-0">Password</label>
-                                <input type="password" class="form-control" id="InputPassword1" placeholder="Password"> </div>
-                        </div>
-                        <button type="submit" class="btn hvr-hover">Register</button>
-                    </form>
-                </div>
-            </div>
+           
             <div class="row">
                 <div class="col-sm-6 col-lg-6 mb-3">
                     <div class="checkout-address">
@@ -202,13 +157,7 @@
                                     <div class="invalid-feedback"> Valid last name is required. </div>
                                 </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="username">Username *</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="username" placeholder="" required>
-                                    <div class="invalid-feedback" style="width: 100%;"> Your username is required. </div>
-                                </div>
-                            </div>
+                            
                             <div class="mb-3">
                                 <label for="email">Email Address *</label>
                                 <input type="email" class="form-control" id="email" placeholder="">
@@ -220,8 +169,8 @@
                                 <div class="invalid-feedback"> Please enter your shipping address. </div>
                             </div>
                             <div class="mb-3">
-                                <label for="address2">Address 2 *</label>
-                                <input type="text" class="form-control" id="address2" placeholder=""> </div>
+                                <label for="contactnum">Contact Number*</label>
+                                <input type="text" class="form-control" id="contactnum" placeholder=""> </div>
                             <div class="row">
                                 <div class="col-md-5 mb-3">
                                     <label for="country">Country *</label>
@@ -246,69 +195,61 @@
                                 </div>
                             </div>
                             <hr class="mb-4">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="same-address">
-                                <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>
-                            </div>
+                            
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="save-info">
                                 <label class="custom-control-label" for="save-info">Save this information for next time</label>
                             </div>
                             <hr class="mb-4">
                             <div class="title"> <span>Payment</span> </div>
-                            <div class="d-block my-3">
-                                <div class="custom-control custom-radio">
-                                    <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required>
-                                    <label class="custom-control-label" for="debit">Cash on Delivery</label>
-                                </div>
-                                <div class="custom-control custom-radio">
-                                    <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required>
-                                    <label class="custom-control-label" for="credit">Credit card</label>
-                                </div>
-                                <div class="custom-control custom-radio">
-                                    <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required>
-                                    <label class="custom-control-label" for="debit">Debit card</label>
-                                </div>
-                                <div class="custom-control custom-radio">
-                                    <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required>
-                                    <label class="custom-control-label" for="paypal">PayMaya</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="cc-name">Name on card</label>
-                                    <input type="text" class="form-control" id="cc-name" placeholder="" required> <small class="text-muted">Full name as displayed on card</small>
-                                    <div class="invalid-feedback"> Name on card is required </div>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="cc-number">Credit card number</label>
-                                    <input type="text" class="form-control" id="cc-number" placeholder="" required>
-                                    <div class="invalid-feedback"> Credit card number is required </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3 mb-3">
-                                    <label for="cc-expiration">Expiration</label>
-                                    <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
-                                    <div class="invalid-feedback"> Expiration date required </div>
-                                </div>
-                                <div class="col-md-3 mb-3">
-                                    <label for="cc-expiration">CVV</label>
-                                    <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
-                                    <div class="invalid-feedback"> Security code required </div>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <div class="payment-icon">
-                                        <ul>
-                                            <li><img class="img-fluid" src="images/payment-icon/1.png" alt=""></li>
-                                            <li><img class="img-fluid" src="images/payment-icon/2.png" alt=""></li>
-                                            <li><img class="img-fluid" src="images/payment-icon/3.png" alt=""></li>
-                                            <li><img class="img-fluid" src="images/payment-icon/5.png" alt=""></li>
-                                            <li><img class="img-fluid" src="images/payment-icon/7.png" alt=""></li>
-                                        </ul>
+                            
+                                    <div class="d-block my-3">
+                                        <div class="custom-control custom-radio">
+                                            <input id="cash" name="paymentMethod" type="radio" class="custom-control-input" required>
+                                            <label class="custom-control-label" for="cash">Cash on Delivery</label>
+                                        </div>
+                                        <div class="custom-control custom-radio">
+                                            <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required>
+                                            <label class="custom-control-label" for="credit">Credit card</label>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
+
+                               <!-- Credit card details -->
+                                    <div class="row" id="creditCardDetails">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="cc-name">Name on card</label>
+                                            <input type="text" class="form-control" id="cc-name" placeholder="" required>
+                                            <small class="text-muted">Full name as displayed on card</small>
+                                            <div class="invalid-feedback"> Name on card is required </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="cc-number">Credit card number</label>
+                                            <input type="text" class="form-control" id="cc-number" placeholder="" required>
+                                            <div class="invalid-feedback"> Credit card number is required </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="cc-expiration">Expiration</label>
+                                            <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
+                                            <div class="invalid-feedback"> Expiration date required </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="cc-cvv">CVV</label>
+                                            <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
+                                            <div class="invalid-feedback"> Security code required </div>
+                                        </div>
+                                        <div class="col-md-12 mb-3">
+                                            <div class="payment-icon">
+                                                <ul>
+                                                    <li><img class="img-fluid" src="images/payment-icon/1.png" alt=""></li>
+                                                    <li><img class="img-fluid" src="images/payment-icon/2.png" alt=""></li>
+                                                    <li><img class="img-fluid" src="images/payment-icon/3.png" alt=""></li>
+                                                    <li><img class="img-fluid" src="images/payment-icon/5.png" alt=""></li>
+                                                    <li><img class="img-fluid" src="images/payment-icon/7.png" alt=""></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
                             <hr class="mb-1"> </form>
                     </div>
                 </div>
@@ -355,15 +296,20 @@
                                 </div>
                                 <hr>
                                 <div class="d-flex gr-total">
-                                    <h5>Grand Total</h5>
-                                    <div class="ml-auto h5" id="grandTotal">₱0.00</div>
+                                    <h5>Amount Payable</h5>
+                                    <div class="ml-auto h5" id="Amount Payable">₱0.00</div>
                                 </div>
                                 <hr>
                             </div>
                         </div>
                         
                         
-                        <div class="col-12 d-flex shopping-box"> <a href="checkout.html" class="ml-auto btn hvr-hover">Place Order</a> </div>
+                        <div class="col-12 d-flex shopping-box">
+                            <a href="#" id="placeOrderBtn" class="ml-auto btn hvr-hover">Place Order</a>
+                        </div>
+                        <div id="creditCardDetails">
+                            <!-- The container for displaying the summary -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -450,7 +396,9 @@
     <script src="js/form-validator.min.js"></script>
     <script src="js/contact-form-script.js"></script>
     <script src="js/custom.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
    <!-- ... (your existing HTML structure) -->
+ 
    <script>
 //     // Retrieve the cart data from localStorage
 //     let cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -576,6 +524,65 @@
 //     return { subTotal, shippingCost, grandTotal };
 // }
 // ``
+// Parse the cart information from the URL parameter
+// Parse the cart information from the URL parameter
+const urlParams = new URLSearchParams(window.location.search);
+const cartInfoParam = urlParams.get('cartInfo');
+const cartItems = JSON.parse(decodeURIComponent(cartInfoParam)) || {};
+
+// Function to calculate the total price of items in the cart
+const calculateTotalPrice = () => {
+    let total = 0;
+
+    for (const productId in cartItems) {
+        const productData = cartItems[productId].productData;
+        const quantity = cartItems[productId].quantity;
+
+        // Calculate the total price for each product
+        const productTotal = parseFloat(productData.price) * quantity;
+        total += productTotal;
+    }
+
+    return total;
+};
+
+// Function to calculate the total shipping cost based on the number of products and their quantities
+const calculateShippingCost = () => {
+    let totalQuantity = 0;
+
+    for (const productId in cartItems) {
+        const quantity = cartItems[productId].quantity;
+        totalQuantity += quantity;
+    }
+
+    // Calculate the shipping cost based on the number of products and their quantities
+    const shippingCost = totalQuantity * 100; // 100 is the shipping cost per product
+
+    return shippingCost;
+};
+
+// Function to update the UI with calculated values
+const updateCheckoutUI = () => {
+    const subTotalElement = document.getElementById('subTotal');
+    const shippingCostElement = document.getElementById('shippingCost');
+    const grandTotalElement = document.getElementById('Amount Payable');
+
+    // Calculate sub-total, shipping cost, and grand total
+    const subTotal = calculateTotalPrice();
+    const shippingCost = calculateShippingCost();
+    const grandTotal = subTotal + shippingCost;
+
+    // Update UI elements
+    subTotalElement.innerHTML = `₱${subTotal.toFixed(2)}`;
+    shippingCostElement.innerHTML = `₱${shippingCost.toFixed(2)}`;
+    grandTotalElement.innerHTML = `₱${grandTotal.toFixed(2)}`;
+};
+
+// Initial update when the page loads
+updateCheckoutUI();
+
+
+
 
 document.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
@@ -608,7 +615,97 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
+       
+    document.addEventListener('DOMContentLoaded', function () {
+        const creditCardDetails = document.getElementById('creditCardDetails');
+        const billingAddressForm = document.querySelector('.needs-validation');
 
+        // Function to check if billing address is complete
+        function isBillingAddressComplete() {
+            const requiredFields = ['firstName'];  // Add other field IDs as needed
+            let isComplete = true;
+
+            requiredFields.forEach(function (field) {
+                const inputField = document.getElementById(field);
+                if (!inputField || !inputField.value.trim()) {
+                    isComplete = false;
+                    if (inputField) {
+                        inputField.classList.add('is-invalid');
+                    }
+                } else {
+                    if (inputField) {
+                        inputField.classList.remove('is-invalid');
+                    }
+                }
+            });
+
+            if (!isComplete) {
+                alert('Please fill out the required billing address fields.');
+            }
+
+            return isComplete;
+        }
+
+        document.getElementById('placeOrderBtn').addEventListener('click', function () {
+    // Check if billing address is complete
+    if (!isBillingAddressComplete()) {
+        console.log('Billing address is incomplete');
+        return;  // Stop further processing if billing address is not complete
+    }
+
+    // Get the form values
+    const firstName = document.getElementById('firstName').value;
+    // ... (repeat for other form fields)
+
+    console.log('Form values:', { firstName, lastName, /* ... other fields ... */ });
+
+    // Get the selected payment method
+    const selectedPaymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
+
+    if (!selectedPaymentMethod) {
+        console.log('Payment method not selected');
+        alert('Please select a payment method.');
+        return;
+    }
+
+    console.log('Selected payment method:', selectedPaymentMethod.value);
+
+    // Get the payment method label using the function
+    const paymentMethodLabel = getPaymentMethodLabel(selectedPaymentMethod.value);
+
+    console.log('Payment method label:', paymentMethodLabel);
+
+    // Create a summary message
+    const summaryMessage = `
+        Order Summary:
+        Name: ${firstName} ${lastName}
+        Username: ${username}
+        Email: ${email}
+        Address: ${address}, ${state}, ${country}, ${zip}
+        Contact Number: ${contactNum}
+        Payment Method: ${paymentMethodLabel}
+    `;
+
+    // Log the summary to the console for debugging
+    console.log('Summary Message:', summaryMessage);
+
+    // Display the success message
+    alert('Order successful!\n\n' + summaryMessage);
+
+    // Additional debug statement
+    console.log('Button clicked and processing completed.');
+});
+
+
+
+
+        // Toggle credit card details visibility
+        document.querySelectorAll('input[name="paymentMethod"]').forEach(function (radio) {
+            radio.addEventListener('change', function () {
+                creditCardDetails.style.display = this.value === 'credit' ? 'block' : 'none';
+            });
+        });
+    });
 
 </script>
 <!-- End of updated script block -->
