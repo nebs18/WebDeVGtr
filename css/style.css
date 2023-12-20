@@ -32,6 +32,14 @@
 /*------------------------------------------------------------------
     SKELETON
 -------------------------------------------------------------------*/
+#products-container {
+    margin-bottom: 20px; /* Adjust the value as needed */
+  }
+
+  .products-box {
+    margin-bottom: 20px; /* Adjust the value as needed */
+  }
+  
 /* Add this to your CSS stylesheet */
 .image-background {
     background-size: cover;

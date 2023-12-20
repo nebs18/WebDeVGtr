@@ -642,49 +642,43 @@
         };
 
         const renderProductData = (productId, productData) => {
-            const productElement = document.createElement('div');
-            productElement.classList.add("col-lg-3", "col-md-6", "special-grid", "bass");
-            productElement.innerHTML = `
-						
-                   
-                        <div class="products-single fix">
-                            <div class="box-img-hover">
-                                <img src="${productData.image}" class="img-fluid" alt="Image">
-                                <div class="mask-icon">
-                                    <ul>
-                                        <li><a href="shop-detailb4.html" data-toggle="tooltip" data-placement="right"
-                                                title="View"><i class="fas fa-eye"></i></a></li>
+    const productElement = document.createElement('div');
+    productElement.classList.add("col-lg-3", "col-md-6", "special-grid", "bass");
+    productElement.innerHTML = `
+        <div class="products-single fix">
+            <div class="box-img-hover">
+                <img src="${productData.image}" class="img-fluid" alt="Image">
+                <div class="mask-icon">
+                    <ul>
+                        <li><a href="shop-detailb4.html" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+                    </ul>
+                    <a class="cart" id="${productId}_add_cart">Add to Cart</a>
+                </div>
+            </div>
+            <div class="why-text">
+                <h4 id="${productId}">${productData.productName}</h4>
+                <h5 id="prod_${productId}_price">${productData.price}</h5>
+            </div>
+        </div>
+    `;
 
-                                    </ul>
-                                    <a class="cart" id="${productId}_add_cart" >Add
-                                        to Cart</a>
-                                </div>
-                            </div>
-                            <div class="why-text">
-                                <h4 id="${productId}">${productData.productName}</h4>
-                                <h5 id="prod_${productId}_price"> ${productData.price}</h5>
-                            </div>
-                        </div>
-                    </div>
-               
+    // Make sure to replace "prodListContainer" with the correct container reference
+    const prodListContainer = document.getElementById('prodList');
+    prodListContainer.appendChild(productElement);
 
-                        
-					`;
+    const addToCartButton = document.getElementById(`${productId}_add_cart`);
 
-            prodListContainer.appendChild(productElement);
-
-            const addToCartButton = document.getElementById(`${productId}_add_cart`);
-
-            addToCartButton.addEventListener('click', () => {
-                // Add the necessary information, including the quantity, to the item object
-                const item = {
-                    title: productData.productName,
-                    productImg: productData.image,
-                    quantity: 1, // Set the initial quantity here
-                };
-                addToCart(productId, item);
-            });
+    addToCartButton.addEventListener('click', () => {
+        // Add the necessary information, including the quantity, to the item object
+        const item = {
+            title: productData.productName,
+            productImg: productData.image,
+            quantity: 1, // Set the initial quantity here
         };
+        addToCart(productId, item);
+    });
+};
+
 
         const fetchProductData = () => {
             onValue(productsRef, (snapshot) => {
