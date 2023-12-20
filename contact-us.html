@@ -174,35 +174,29 @@
                     <div class="contact-form-right">
                         <h2>GET IN TOUCH</h2>
                         <p>We value your input and are here to assist you in any way we can. Whether you have questions about our products, need assistance with an order, or just want to share your thoughts, please don't hesitate to reach out. Our dedicated team is committed to providing excellent customer service and ensuring your experience with us is positive.</p>
-                        <form id="contactForm">
+                        <form action="mailto:pimamusic01@gmail.com" method="post" enctype="text/plain">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required data-error="Please enter your name">
-                                        <div class="help-block with-errors"></div>
+                                        <input type="text" class="form-control" name="name" placeholder="Your Name" required>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <input type="text" placeholder="Your Email" id="email" class="form-control" name="name" required data-error="Please enter your email">
-                                        <div class="help-block with-errors"></div>
+                                        <input type="text" placeholder="Your Email" class="form-control" name="email" required>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="subject" name="name" placeholder="Subject" required data-error="Please enter your Subject">
-                                        <div class="help-block with-errors"></div>
+                                        <input type="text" class="form-control" name="subject" placeholder="Subject" required>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <textarea class="form-control" id="message" placeholder="Your Message" rows="4" data-error="Write your message" required></textarea>
-                                        <div class="help-block with-errors"></div>
+                                        <textarea class="form-control" name="message" placeholder="Your Message" rows="4" required></textarea>
                                     </div>
                                     <div class="submit-button text-center">
-                                        <button class="btn hvr-hover" id="submit" type="submit">Send Message</button>
-                                        <div id="msgSubmit" class="h3 text-center hidden"></div>
-                                        <div class="clearfix"></div>
+                                        <button class="btn hvr-hover" type="submit">Send Message</button>
                                     </div>
                                 </div>
                             </div>
