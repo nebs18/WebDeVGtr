@@ -32,13 +32,22 @@
 /*------------------------------------------------------------------
     SKELETON
 -------------------------------------------------------------------*/
-#products-container {
-    margin-bottom: 20px; /* Adjust the value as needed */
-  }
 
-  .products-box {
-    margin-bottom: 20px; /* Adjust the value as needed */
-  }
+
+.products-box {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    height: auto;
+}
+
+.container {
+    flex: 1;
+}
+
+.footer {
+    min-height: 50px; /* Adjust this value based on your footer height */
+}
   
 /* Add this to your CSS stylesheet */
 .image-background {
@@ -1349,6 +1358,7 @@
  .footer-main{
      padding: 70px 0px;
      background: #202020;
+     z-index: 10;
 }
  .footer-widget h4 {
      color: #ffffff;
