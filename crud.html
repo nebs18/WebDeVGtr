@@ -44,6 +44,36 @@
     <link rel="stylesheet" href="css/responsive.css">
     <!-- Custom CSS -->
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+     
+   <style>
+    nav {
+    text-align: center;
+    background-color: #333;
+    padding: 10px 0;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+  
+li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    
+}
+ .active {
+            color: blue; /* Change this to your desired active link color */
+        }
+</style>
+
 </head>
 
 <body class="goto-here">
@@ -87,7 +117,12 @@
         </div>
     </nav>
     <!-- END nav -->
-
+    <nav>
+        <ul>
+            <li><a href="crud.html" class="active">Product Management</a></li>
+            <li><a href="om.html">Order Management</a></li>
+        </ul>
+    </nav>
     <div class="hero-wrap hero-bread" style="background-image: url('images/img8.jpg');">
         <div class="container">
             <div class="row no-gutters slider-text align-items-center justify-content-center">
@@ -575,8 +610,6 @@
 
             fetchProductData();
         });
-
-
     </script>
 
 
