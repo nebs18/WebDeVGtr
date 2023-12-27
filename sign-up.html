@@ -38,33 +38,41 @@
         };
       
         const app = initializeApp(firebaseConfig);
-        const db = getDatabase();
-        const auth = getAuth(app);
+const db = getDatabase(app);
+const auth = getAuth(app);
 
-        let EmailInp = document.getElementById('emailInp');
-        let PassInp = document.getElementById('passwordInp');
-        let FnameInp = document.getElementById('fnameInp');
-        let LnameInp = document.getElementById('lnameInp');
-        let MainForm = document.getElementById('MainForm');
+let EmailInp = document.getElementById('emailInp');
+let PassInp = document.getElementById('passwordInp');
+let FnameInp = document.getElementById('fnameInp');
+let LnameInp = document.getElementById('lnameInp');
+let MainForm = document.getElementById('MainForm');
 
-        let RegisterUser = evt => {
-            evt.preventDefault();
+let RegisterUser = evt => {
+  evt.preventDefault();
 
-            createUserWithEmailAndPassword(auth, EmailInp.value, PassInp.value)
-            .then((credentials)=>{
-                set(ref(db, 'UsersAuthList/' + credentials.user.uid),{
-                    firstname: FnameInp.value,
-                    lastname: LnameInp.value
-                })
-            })
-            .catch((error)=>{
-                alert(error.message);
-                console.log(error.code);
-                console.log(error.message);
-            })
-            alert("Account Created Successfully");
-        }
+  createUserWithEmailAndPassword(auth, EmailInp.value, PassInp.value)
+    .then((credentials) => {
+      console.log("User created successfully:", credentials.user.uid);
+      // This block is executed if user creation is successful
+      set(ref(db, 'UsersAuthList/' + credentials.user.uid), {
+        firstname: FnameInp.value,
+        lastname: LnameInp.value
+      })
+        .then(() => {
+          console.log("User data stored successfully.");
+          alert("Account Created Successfully");
+        })
+        .catch(error => {
+          console.error("Error storing user data:", error.message);
+        });
+    })
+    .catch((error) => {
+      // This block is executed if user creation fails
+      alert(error.message);
+      console.error("Error creating user:", error.code, error.message);
+    });
+};
 
-        MainForm.addEventListener('submit', RegisterUser)
+MainForm.addEventListener('submit', RegisterUser);
       </script>
 </html>
