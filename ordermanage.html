@@ -86,7 +86,7 @@ a {
             <div class="container">
                 <!-- Start Header Navigation -->
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#"><img src="images/logo.png" class="logo" alt="" style="display:flex; justify-content:center; align-items:center;"></a>
+                    <a class="navbar-brand" href="#"><img src="images/logo.png" class="logo" alt="" style="justify-content:center; align-items:center;"></a>
                 </div>
 
                 <!-- End Header Navigation -->
@@ -101,15 +101,12 @@ a {
         <!-- End Navigation -->
     </header>
     <!-- End Main Top -->
-    
-    <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false"><span class="icon-user"></span></a>
-        <div class="dropdown-menu" aria-labelledby="dropdown04" id="userDropdown">
-        </div>
-    </li>
   
 
+    
+  
+
+</ul>
 <!-- END nav -->
     <nav>
         <ul>
@@ -121,83 +118,49 @@ a {
         <div class="container">
             <div class="row no-gutters slider-text align-items-center justify-content-center">
                 <div class="col-md-9 ftco-animate text-center">
-                    <h1 class="mb-0 bread">Product Management</h1>
+                    <h1 class="mb-0 bread">Order Management</h1>
                 </div>
             </div>
         </div>
     </div>
 
-  
+    
+    <section class="ftco-section contact-section bg-light">
+        <div class="container">
+            
+            <!-- Add this HTML code where you want the product list and edit form to appear -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">User</th>
+                        <th scope="col">Product Image</th>
+                        <th scope="col">Product Name</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider" id="productList">
+                    <!-- Data will be dynamically populated here -->
+                </tbody>
+            </table>
+    
+            <!-- Modal for adding a new product -->
+            <!-- ... (your existing modal code) ... -->
+    
+            <!-- Modal for updating a product -->
+            <div id="editFormContainer">
+                <div class="modal fade" id="updateProduct" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <!-- ... (your existing modal code) ... -->
+                </div>
+            </div>
+        </div>
+    </section>
+    
 
 
 <!-- END nav -->
     </body>
-    <script>// Function to get shipping address summary
-        function getShippingAddressSummary() {
-            // Replace this with your actual logic to retrieve the shipping address summary
-            const shippingAddressSummary = "Shipping Address: John Doe, 123 Main St, City, Country, 12345";
-            return shippingAddressSummary;
-        }
-        
-        // Function to update the dropdown table
-        function updateDropdownTable() {
-            // Get the dropdown container
-            const dropdownContainer = document.getElementById('userDropdown');
-        
-            // Clear existing content
-            dropdownContainer.innerHTML = "";
-        
-            // Create a table element
-            const table = document.createElement('table');
-            table.className = 'table';
-        
-            // Create table header
-            const thead = document.createElement('thead');
-            const headerRow = document.createElement('tr');
-            const headers = ['User', 'Product Name', 'Quantity', 'Total Price', 'Status'];
-        
-            headers.forEach(headerText => {
-                const th = document.createElement('th');
-                th.appendChild(document.createTextNode(headerText));
-                headerRow.appendChild(th);
-            });
-        
-            thead.appendChild(headerRow);
-            table.appendChild(thead);
-        
-            // Create table body
-            const tbody = document.createElement('tbody');
-        
-            // Add sample data (replace with your actual data)
-            const data = [
-                ['User1', 'Product1', 2, '$20.00', 'Shipped'],
-                ['User2', 'Product2', 1, '$10.00', 'Pending'],
-                ['User3', 'Product3', 3, '$30.00', 'Delivered']
-            ];
-        
-            data.forEach(rowData => {
-                const tr = document.createElement('tr');
-                rowData.forEach(cellData => {
-                    const td = document.createElement('td');
-                    td.appendChild(document.createTextNode(cellData));
-                    tr.appendChild(td);
-                });
-                tbody.appendChild(tr);
-            });
-        
-            table.appendChild(tbody);
-        
-            // Append the table to the dropdown container
-            dropdownContainer.appendChild(table);
-        
-            // Add shipping address summary
-            const shippingAddressSummary = getShippingAddressSummary();
-            const summaryDiv = document.createElement('div');
-            summaryDiv.innerHTML = `<strong>${shippingAddressSummary}</strong>`;
-            dropdownContainer.appendChild(summaryDiv);
-        }
-        
-        // Call the function to update the dropdown table
-        updateDropdownTable();
-        </script>
+    
     </html>
