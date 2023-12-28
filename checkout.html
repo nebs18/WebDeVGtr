@@ -147,7 +147,7 @@
                 <div class="col-sm-6 col-lg-6 mb-3">
                     <div class="checkout-address">
                         <div class="title-left">
-                            <h3>Billing address</h3>
+                            <h3>Shipping Information</h3>
                         </div>
                         <form class="needs-validation" novalidate>
                             <div class="row">
@@ -630,9 +630,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Get the form values
     const firstName = document.getElementById('firstName').value;
-    // ... (repeat for other form fields)
+    const lastName = document.getElementById('lastName').value;
+    const address = document.getElementById('address').value;
+    const contactNum = document.getElementById('contactNum').value;
 
-    console.log('Form values:', { firstName, lastName, /* ... other fields ... */ });
+    console.log('Form values:', { firstName, lastName, address, contactNum });
 
     // Get the selected payment method
     const selectedPaymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
@@ -654,9 +656,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const summaryMessage = `
         Order Summary:
         Name: ${firstName} ${lastName}
-        Username: ${username}
-        Email: ${email}
-        Address: ${address}, ${state}, ${country}, ${zip}
+        Address: ${address}
         Contact Number: ${contactNum}
         Payment Method: ${paymentMethodLabel}
     `;
@@ -670,6 +670,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Additional debug statement
     console.log('Button clicked and processing completed.');
 });
+
 
 
 
