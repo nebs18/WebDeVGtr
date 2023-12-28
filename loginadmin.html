@@ -3,6 +3,8 @@
 
 <head>
   <title>Log-in | Sign-up</title>
+  <link rel="shortcut icon" href="images/toplogo.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="images/toplogo.png">
   <link rel="stylesheet" type="text/css" href="stayl.css">
   <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
 </head>
@@ -13,10 +15,11 @@
 <!-- div -->
     <div class="signup">
       <form id="MainForm">
-        <label for="chk" aria-hidden="true">Login Administrator</label>
+        <label for="chk" aria-hidden="true" style="text-align: center;">Login Administrator</label>
         <input type="email" class="form-control" id="emailInp" name="email" placeholder="Email">
         <input type="password" class="form-control" id="passwordInp" name="pswd" placeholder="Password">
         <button type="submit" class="btn btn-primary" name="signup_submit">Login </button>
+        <p style="text-align: center; color: white;">Not an admin? Click <a href="sign-up.html" style="color: orange;">Here</a></p>
       </form>
     </div>
   </div>
@@ -47,6 +50,9 @@
     let EmailInp = document.getElementById('emailInp');
     let PassInp = document.getElementById('passwordInp');
     let MainForm = document.getElementById('MainForm');
+
+    EmailInp.value = 'admin@admin.com';
+    PassInp.value = 'admin1';
   
     let SignInUser = evt => {
       evt.preventDefault();
