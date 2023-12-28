@@ -262,7 +262,7 @@ function deleteInfo(index){
         originalData.splice(index, 1);
         localStorage.setItem("userProfile", JSON.stringify(originalData));
         
-        // Update getData after deleting the record
+        // Update getData after deleting the record. .
         getData = [...originalData];
 
         preLoadCalculations()
