@@ -34,6 +34,33 @@
     <![endif]-->
 
 </head>
+<style>
+    .my-account-box-main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+       
+    }
+
+    .container {
+        text-align: center;
+    }
+
+    .orders-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px; /* Adjust as needed */
+    }
+
+    .orders-table th, .orders-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    .orders-table th {
+        background-color: #f2f2f2;
+    }
+</style>
 
 <body>
 
@@ -146,28 +173,23 @@
     <!-- Start   -->
     <div class="my-account-box-main">
         <div class="container">
-            <div class="my-account-page">
-                <div class="row">
-                    <div class="col-lg-4 col-md-12">
-                        <div class="account-box">
-                            <div class="service-box">
-                                <div class="service-icon">
-                                    <a href="#"> <i class="fa fa-gift"></i> </a>
-                                </div>
-                                <div class="service-desc">
-                                    <h4>Your Orders</h4>
-                                    <p>Status of Orders</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                   
-                    
-                </div>
-            </div>
+            <table id="ordersTable" class="orders-table">
+                <thead>
+                    <tr>
+                        <th>Name of Product</th>
+                        <th>Quantity</th>
+                        <th>Total Price</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="ordersTableBody">
+                    <!-- Existing and dynamically added rows will appear here -->
+                </tbody>
+            </table>
         </div>
     </div>
+    
+    
     <!-- End  -->
 
 
