@@ -108,7 +108,7 @@
                                    
                                 </ul>
                             </li>
-                        <li> <a href="products2.html" class="fa fa-shopping-bag">Back to cart </class=></a> </li>
+                        <li> <a href="products2.html" class="fa fa-shopping-bag">Back to cart</class=></a> </li>
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -147,10 +147,10 @@
                 <div class="col-sm-6 col-lg-6 mb-3">
                     <div class="checkout-address">
                         <div class="title-left">
-                            <h3>Billing address</h3>
+                            <h3>Shipping Information</h3>
                         </div>
                         <form class="needs-validation" novalidate>
-                            <div class="row">
+                            <div id="orderForm" class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="firstName">First name *</label>
                                     <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
@@ -164,47 +164,18 @@
                             </div>
                             
                             <div class="mb-3">
-                                <label for="email">Email Address *</label>
-                                <input type="email" class="form-control" id="email" placeholder="">
-                                <div class="invalid-feedback"> Please enter a valid email address for shipping updates. </div>
-                            </div>
-                            <div class="mb-3">
                                 <label for="address">Address *</label>
                                 <input type="text" class="form-control" id="address" placeholder="" required>
                                 <div class="invalid-feedback"> Please enter your shipping address. </div>
                             </div>
+                            
                             <div class="mb-3">
                                 <label for="contactnum">Contact Number*</label>
-                                <input type="text" class="form-control" id="contactnum" placeholder=""> </div>
-                            <div class="row">
-                                <div class="col-md-5 mb-3">
-                                    <label for="country">Country *</label>
-                                    <select class="wide w-100" id="country">
-									<option value="Choose..." data-display="Select">Choose...</option>
-									<option value="United States">United States</option>
-								</select>
-                                    <div class="invalid-feedback"> Please select a valid country. </div>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <label for="state">State *</label>
-                                    <select class="wide w-100" id="state">
-									<option data-display="Select">Choose...</option>
-									<option>California</option>
-								</select>
-                                    <div class="invalid-feedback"> Please provide a valid state. </div>
-                                </div>
-                                <div class="col-md-3 mb-3">
-                                    <label for="zip">Zip *</label>
-                                    <input type="text" class="form-control" id="zip" placeholder="" required>
-                                    <div class="invalid-feedback"> Zip code required. </div>
-                                </div>
+                                <input type="text" class="form-control" id="contactnum" placeholder="">
                             </div>
                             <hr class="mb-4">
                             
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="save-info">
-                                <label class="custom-control-label" for="save-info">Save this information for next time</label>
-                            </div>
+                           
                             <hr class="mb-4">
                             <div class="title"> <span>Payment</span> </div>
                             
@@ -310,7 +281,7 @@
                         
                         
                         <div class="col-12 d-flex shopping-box">
-                            <a href="#" id="placeOrderBtn" class="ml-auto btn hvr-hover">Place Order</a>
+                            <a id="placeOrderBtn" class="ml-auto btn hvr-hover">Place Order</a>  
                         </div>
                         <div id="creditCardDetails">
                             <!-- The container for displaying the summary -->
@@ -650,7 +621,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             return isComplete;
         }
-
         document.getElementById('placeOrderBtn').addEventListener('click', function () {
     // Check if billing address is complete
     if (!isBillingAddressComplete()) {
@@ -660,9 +630,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Get the form values
     const firstName = document.getElementById('firstName').value;
-    // ... (repeat for other form fields)
+    const lastName = document.getElementById('lastName').value;
+    const address = document.getElementById('address').value;
+    const contactNum = document.getElementById('contactNum').value;
 
-    console.log('Form values:', { firstName, lastName, /* ... other fields ... */ });
+    console.log('Form values:', { firstName, lastName, address, contactNum });
 
     // Get the selected payment method
     const selectedPaymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
@@ -675,33 +647,85 @@ document.addEventListener('DOMContentLoaded', () => {
 
     console.log('Selected payment method:', selectedPaymentMethod.value);
 
-    // Get the payment method label using the function
-    const paymentMethodLabel = getPaymentMethodLabel(selectedPaymentMethod.value);
+    // Get the product details
+    const productName = "Example Product";  // Replace with actual product name
+    const quantity = 1;  // Replace with actual quantity
+    const total = 100;  // Replace with actual total price
 
-    console.log('Payment method label:', paymentMethodLabel);
+    // Create an object to hold order data
+    const orderData = {
+        user: `${firstName} ${lastName}`,
+        contactNum,
+        address,
+        paymentMethod: getPaymentMethodLabel(selectedPaymentMethod.value),
+        productName,
+        quantity,
+        total,
+    };
 
-    // Create a summary message
-    const summaryMessage = `
-        Order Summary:
-        Name: ${firstName} ${lastName}
-        Username: ${username}
-        Email: ${email}
-        Address: ${address}, ${state}, ${country}, ${zip}
-        Contact Number: ${contactNum}
-        Payment Method: ${paymentMethodLabel}
-    `;
-
-    // Log the summary to the console for debugging
-    console.log('Summary Message:', summaryMessage);
-
-    // Display the success message
-    alert('Order successful!\n\n' + summaryMessage);
-
-    // Additional debug statement
-    console.log('Button clicked and processing completed.');
+    // Display the order summary in an alert box
+    showOrderSummaryAlert(orderData);
 });
 
+function showOrderSummaryAlert(orderData) {
+    // Create a string with the order summary
+    const summaryMessage = `
+        Order Summary:
+        User: ${orderData.user}
+        Contact Number: ${orderData.contactNum}
+        Address: ${orderData.address}
+        Payment Method: ${orderData.paymentMethod}
+        Product Name: ${orderData.productName}
+        Quantity: ${quantity}
+        Total: ${orderData.grandTotal}
+    `;
 
+    // Display the order summary in an alert box
+    alert(summaryMessage);
+    
+}
+document.getElementById('placeOrderBtn').addEventListener('click', function () {
+const orderData = {
+            user: `${firstName} ${lastName}`,
+            contactNum,
+            address,
+            paymentMethod: getPaymentMethodLabel(selectedPaymentMethod.value),
+            productName,
+            quantity,
+            total,
+        };
+
+        // Display the order summary in an alert box
+        showOrderSummaryAlert(orderData);
+
+        // Send the order data to the orders.html page
+        sendOrderDataToOrdersPage(orderData);
+    });
+
+    function showOrderSummaryAlert(orderData) {
+        // Your existing code ...
+    }
+    function sendOrderDataToOrdersPage(orderData) {
+    // Convert order data to a string
+    const orderString = `
+        <tr>
+            <td>${orderData.productName}</td>
+            <td>${orderData.quantity}</td>
+            <td>${orderData.total}</td>
+            <td>Pending</td>
+        </tr>
+    `;
+
+    // Append the new row to the orders table
+    const ordersTableBody = document.getElementById('ordersTable');
+
+    if (ordersTableBody) {
+        ordersTableBody.insertAdjacentHTML('beforeend', orderString);
+        console.log('Row added to orders table.');
+    } else {
+        console.error('Orders table not found.');
+    }
+}
 
 
         // Toggle credit card details visibility
